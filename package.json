@@ -3,6 +3,7 @@
   "displayName": "LABSyntaxes",
   "description": "",
   "version": "0.0.1",
+  "publisher": "pf",
   "engines": {
     "vscode": "^1.84.0"
   },

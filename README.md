@@ -1,6 +1,5 @@
 # labsyntaxes README
 
-This is the README for your extension "labsyntaxes". After writing up a brief description, we recommend including the following sections.
 
 ## Features
 
