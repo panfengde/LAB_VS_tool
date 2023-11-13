@@ -1,0 +1,25 @@
+{
+  "name": "labsyntaxes",
+  "displayName": "LABSyntaxes",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.84.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "LAB",
+      "aliases": ["LAB", "LAB"],
+      "extensions": [".lab"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "LAB",
+      "scopeName": "LAB",
+      "path": "./syntaxes/LAB.tmLanguage.json"
+    }]
+  }
+}
