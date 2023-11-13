@@ -1,31 +1,158 @@
 {
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
 	"name": "LAB",
+	"foldingStartMarker": "\\(\\s*$",
+	"foldingStopMarker": "^\\s*\\)",
 	"patterns": [
+		{
+			"include": "#xmlOpenl"
+		},
+		{
+			"include": "#xmlClose"
+		},
+		{
+			"include": "#attribute"
+		},
+		{
+			"include": "#expression"
+		},
+		{
+			"include": "#test"
+		},
 		{
 			"include": "#keywords"
 		},
 		{
-			"include": "#strings"
+			"include": "#numbers"
+		},
+		{
+			"include": "#string"
+		},
+		{
+			"include": "#comment"
 		}
 	],
 	"repository": {
-		"keywords": {
-			"patterns": [{
-				"name": "keyword.control.LAB",
-				"match": "\\b(if|while|for|return)\\b"
-			}]
+		"test": {
+			"match": "pf",
+			"name": "keyword.letter"
 		},
-		"strings": {
-			"name": "string.quoted.double.LAB",
-			"begin": "\"",
-			"end": "\"",
+		"keywords": {
 			"patterns": [
 				{
-					"name": "constant.character.escape.LAB",
+					"name": "keyword",
+					"match": "\\b(let|function|quote|return|if|begin|set|lambda|class|define-syntax|new|get|cond|switch|Cons|Array|import|eval|while|export|from|=)\\b"
+				}
+			]
+		},
+		"numbers": {
+			"patterns": [
+				{
+					"name": "constant.numeric.mynumber",
+					"match": "[0-9]+"
+				}
+			]
+		},
+		"string": {
+			"begin": "\"",
+			"end": "\"",
+			"name": "string.quoted.double",
+			"patterns": [
+				{
+					"name": "constant.character.escape",
 					"match": "\\\\."
 				}
 			]
+		},
+		"comment": {
+			"begin": "(^[ \\t]+)?(?=;)",
+			"beginCaptures": {
+				"1": {
+					"name": "punctuation.whitespace.comment.leading"
+				}
+			},
+			"end": "(?!\\G)",
+			"patterns": [
+				{
+					"begin": ";",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment"
+						}
+					},
+					"end": "\\n",
+					"name": "comment.line.semicolon"
+				}
+			]
+		},
+		"expression": {
+			"name": "expression.group",
+			"begin": "\\(",
+			"end": "\\)",
+			"patterns": [
+				{
+					"match": "\\s*([a-zA-Z_]+[a-zA-Z0-9_.]*)\\s+([\\s\\S]*)",
+					"captures": {
+						"1": {
+							"name": "keyword.operator"
+						},
+						"2": {
+							"patterns": [
+								{
+									"include": "#xmlOpenl"
+								},
+								{
+									"include": "#xmlClose"
+								},
+								{
+									"include": "#keywords"
+								},
+								{
+									"include": "#numbers"
+								},
+								{
+									"include": "#expression"
+								},
+								{
+									"include": "#string"
+								},
+								{
+									"include": "#attribute"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"1xmlOpenl": {
+			"begin": "<",
+			"end": "/>",
+			"name": "string.xml"
+		
+		},
+		"1xmlClose": {
+			"begin": "</",
+			"end": ">",
+			"name": "keyword"
+		},
+		"attribute": {
+			"match": "(\\w*)(=)(\\w*)",
+			"captures": {
+				"1": {
+					"name": "support.type.property-name"
+				},
+				"2": {
+					"name": "keyword"
+				},
+				"3": {
+					"patterns": [
+						{
+							"include": "#expression"
+						}
+					]
+				}
+			}
 		}
 	},
 	"scopeName": "LAB"
