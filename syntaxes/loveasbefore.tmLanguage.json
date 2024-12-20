@@ -1,0 +1,237 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "LoveAsBefore",
+	"patterns": [
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#numbers"
+		},
+		{
+			"include": "#object"
+		},
+		{
+			"include": "#expressions"
+		},
+		{
+			"include": "#xml-elements"
+		},
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#attribute"
+		},
+		{
+			"include": "#myArray"
+		}
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [
+				{
+					"name": "keyword.control.loveasbefore",
+					"match": "\\b(if|while|for|return|function|panfeng)\\b"
+				}
+			]
+		},
+		"strings": {
+			"name": "string.quoted.double.loveasbefore",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.loveasbefore",
+					"match": "\\\\."
+				}
+			]
+		},
+		"expressions": {
+			"patterns": [
+				{
+					"name": "expression.loveasbefore",
+					"begin": "\\(",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.parenthesis.open.loveasbefore"
+						}
+					},
+					"end": "\\)",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.parenthesis.close.loveasbefore"
+						}
+					},
+					"patterns": [
+						{
+							"name": "entity.name.function.loveasbefore",
+							"match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b",
+							"captures": {
+								"0": {
+									"name": "entity.name.function.loveasbefore"
+								}
+							}
+						},
+						{
+							"name": "variable.parameter.loveasbefore",
+							"match": "(?<=\\b[a-zA-Z_][a-zA-Z0-9_]*\\b)\\s+\\b[a-zA-Z_][a-zA-Z0-9_]*\\b",
+							"captures": {
+								"0": {
+									"name": "variable.parameter.loveasbefore"
+								}
+							}
+						},
+						{
+							"name": "entity.name.function.loveasbefore",
+							"match": "(\\w+)\\.(\\w+)",
+							"captures": {
+								"1": {
+									"name": "variable.loveasbefore"
+								},
+								"2": {
+									"name": "entity.name.function.loveasbefore"
+								}
+							}
+						},
+						{
+							"include": "#expressions"
+						},
+						{
+							"include": "#xml-elements"
+						},
+						{
+							"include": "#myArray"
+						},
+						{
+							"include": "#attribute"
+						}
+					]
+				}
+			]
+		},
+		"xml-elements": {
+			"patterns": [
+				{
+					"name": "entity.name.tag.loveasbefore",
+					"match": "(<)\\s*(\\b[\\w]*\\b)",
+					"captures": {
+						"1": {
+							"name": "variable.loveasbefore"
+						},
+						"2": {
+							"name": "entity.name.tag.loveasbefore"
+						}
+					}
+				},
+				{
+					"name": "entity.name.tag.loveasbefore",
+					"match": "(</)\\s*(\\b[\\w]*\\b)",
+					"captures": {
+						"1": {
+							"name": "variable.loveasbefore"
+						},
+						"2": {
+							"name": "entity.name.tag.loveasbefore"
+						}
+					}
+				},
+				{
+					"name": "string.quoted.double.loveasbefore",
+					"begin": "\"",
+					"end": "\"",
+					"patterns": [
+						{
+							"name": "constant.character.escape.loveasbefore",
+							"match": "\\\\."
+						}
+					]
+				},
+				{
+					"name": "expression.loveasbefore",
+					"begin": "\\{",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.section.embedded.loveasbefore"
+						}
+					},
+					"end": "\\}",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.section.embedded.loveasbefore"
+						}
+					},
+					"patterns": [
+						{
+							"include": "#expressions"
+						}
+					]
+				}
+			]
+		},
+		"parameters": {
+			"patterns": [
+				{
+					"name": "variable.parameter.loveasbefore",
+					"match": "\\b\\w*\\b"
+				}
+			]
+		},
+		"numbers": {
+			"patterns": [
+				{
+					"name": "constant.numeric.mynumber",
+					"match": "[0-9]+"
+				}
+			]
+		},
+		"attribute": {
+			"match": "(\\b\\w*\\b)\\s*(=)\\s*(\\w*)",
+			"captures": {
+				"1": {
+					"name": "support.type.property-name"
+				},
+				"2": {
+					"name": "keyword"
+				},
+				"3": {
+					"patterns": [
+						{
+							"include": "#expressions"
+						}
+					]
+				}
+			}
+		},
+		"myArray": {
+			"begin": "\\[",
+			"end": "\\]",
+			"patterns": [
+				{
+					"match": "\\b[0-9]+\\b",
+					"name": "constant.numeric.loveasbefore"
+				},
+				{
+					"match": ",",
+					"name": "punctuation.separator.comma.loveasbefore"
+				},
+				{
+					"match": "\\.\\.\\.",
+					"name": "keyword.operator.ellipsis.loveasbefore"
+				}
+			]
+		},
+		"comments": {
+      "patterns": [
+        {
+          "match": "//.*$",
+          "name": "comment.line.double-slash.customjson"
+        }
+      ]
+    }
+	},
+	"scopeName": "source.LAB"
+}
