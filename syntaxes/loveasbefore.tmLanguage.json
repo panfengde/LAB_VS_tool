@@ -35,7 +35,7 @@
 			"patterns": [
 				{
 					"name": "keyword.control.loveasbefore",
-					"match": "\\b(if|while|for|return|function|panfeng)\\b"
+					"match": "\\b(let|function|quote|return|if|begin|set|lambda|class|define-syntax|new|get|cond|switch|Cons|Array|import|eval|while|export|from|=>|panfeng|=)\\b"
 				}
 			]
 		},
